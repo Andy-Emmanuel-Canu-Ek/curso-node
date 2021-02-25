@@ -10,31 +10,31 @@ const questions = [
     choices: [
       {
         value: 1,
-        name: "1. Crear tareas",
+        name: `${'1.'.green} Crear tareas`,
       },
       {
         value: 2,
-        name: "2. Listar tareas",
+        name: `${'2.'.green} Listar tareas`,
       },
       {
         value: 3,
-        name: "3. Listar tareas completas",
+        name: `${'3.'.green} Listar tareas completas`,
       },
       {
         value: 4,
-        name: "4. Listar tareas pendientes",
+        name: `${'4.'.green} Listar tareas pendientes`,
       },
       {
         value: 5,
-        name: "5. Completar tarea(s)",
+        name: `${'5.'.green} Completar tarea(s)`,
       },
       {
         value: 6,
-        name: "6. Borrar tarea",
+        name: `${'6.'.green} Borrar tarea`,
       },
       {
         value: 0,
-        name: "0. Salir",
+        name: `${'0.'.green} Salir`,
       },
     ],
   },
@@ -43,7 +43,7 @@ const questions = [
 const inquirerMenu = async () => {
   console.clear();
   console.log("===========================".green);
-  console.log("Seleccione una opción".green);
+  console.log("Seleccione una opción".white);
   console.log("===========================".green);
 
   const { value } = await inquirer.prompt(questions);
@@ -61,7 +61,27 @@ const inquirerPause = async() => {
     await inquirer.prompt(inputPause);
 }
 
+const inquirerInputTask = async (message = '') => {
+
+  const question = [
+    {
+      type: 'input',
+      name: 'desc',
+      message,
+      validate(value){
+        if(value.length === 0){
+          return 'Por favor debe de ingresar una tarea'
+        }
+        return true;
+      }
+    }
+  ];
+
+  let desc = await inquirer.prompt(question);
+  return desc;
+}
 module.exports = {
   inquirerMenu,
-  inquirerPause
+  inquirerPause,
+  inquirerInputTask
 };
