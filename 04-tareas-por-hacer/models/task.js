@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 class Task {
   id = "";
   desc = "";
-  clompleted = null;
+  completed = null;
 
   constructor(desc){
       this.id = uuidv4();
